@@ -1,3 +1,5 @@
+# Joao Pedro Assuncao Coutinho - 18/0019813
+
 def read_file(file_path: str) -> list[str]:
     f = open(file_path, "r")
     lines = f.read().splitlines()
@@ -15,7 +17,7 @@ def is_a_valid_letter(letter: str) -> bool:
     return False
 
 
-def vigenere_cypher(text: list[str], key: str, mode: str):
+def vigenere(text: list[str], key: str, mode: str):
     result_lines: list[str] = []
     key_index = 0
 
@@ -58,13 +60,13 @@ def vigenere_cypher(text: list[str], key: str, mode: str):
 
 
 def main():
-    text = read_file("a.txt")
+    text = read_file("test.txt")
     print(text)
 
-    e = vigenere_cypher(text, "lemon", "enc")
+    e = vigenere(text, "lemon", "enc")
     print(e)
 
-    print(vigenere_cypher(e, "lemon", "dec"))
+    print(vigenere(e, "lemon", "dec"))
 
 
 if __name__ == "__main__":
