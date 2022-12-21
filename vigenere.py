@@ -60,13 +60,16 @@ def vigenere(text: list[str], key: str, mode: str):
 
 
 def main():
-    text = read_file("test.txt")
+    file_name = "desafio2.txt"
+    key = "TEMPORAL"
+
+    text = read_file(file_name)
+
+    # text = vigenere(text, key, "enc")
+    # print(text)
+
+    text = vigenere(text, key, "dec")
     print(text)
-
-    e = vigenere(text, "lemon", "enc")
-    print(e)
-
-    print(vigenere(e, "lemon", "dec"))
 
 
 if __name__ == "__main__":

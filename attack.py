@@ -63,7 +63,7 @@ def index_of_coincidence(text: str) -> float:
     return result
 
 
-def vigenere_discover_key(text: list[str]) -> str:
+def vigenere_discover_keys(text: list[str]) -> str:
     # processing text, so it's easir to work with
     processed_text = " ".join(text)
     processed_text = ''.join(i for i in processed_text if i.isalpha()).upper()
@@ -101,45 +101,48 @@ def vigenere_discover_key(text: list[str]) -> str:
     probable_key_sizes = dict(sorted(
         probable_key_sizes.items(), key=lambda item: item[1], reverse=True))
 
-    key_size = list(probable_key_sizes.keys())[0]
-    key = ""
-    # iterating from 0 to key_size
-    for i in range(key_size):
+    probable_key_sizes = list(probable_key_sizes)[:5]
 
-        # we can calculate letter frequencies of this part
-        part = processed_text[i::key_size]
+    for key_size in probable_key_sizes:
+        key = ""
+        # iterating from 0 to key_size
+        for i in range(key_size):
 
-        frequencies = []
+            # we can calculate letter frequencies of this part
+            part = processed_text[i::key_size]
 
-        for j in range(ord("A"), ord("Z") + 1):
-            frequencies.append(part.count(chr(j))/len(part) * 100)
+            frequencies = []
 
-        # here we get the shift value
-        value: float = 99999.9
-        shifts = 0
+            for j in range(ord("A"), ord("Z") + 1):
+                frequencies.append(part.count(chr(j))/len(part) * 100)
 
-        # testing for all possible shifts
-        for test in range(0, 26):
+            # here we get the shift value
+            value: float = 99999.9
+            shifts = 0
 
-            temp_value: float = 0
+            # testing for all possible shifts
+            for test in range(0, 26):
 
-            for j in range(0, 26):
-                temp_value += abs(pt_letter_prob[j] - frequencies[j])
+                temp_value: float = 0
 
-            if temp_value < value:
-                value = temp_value
-                shifts = test
+                for j in range(0, 26):
+                    temp_value += abs(pt_letter_prob[j] - frequencies[j])
 
-            frequencies.append(frequencies.pop(0))
+                if temp_value < value:
+                    value = temp_value
+                    shifts = test
 
-        key += chr(shifts + ord("A"))
+                frequencies.append(frequencies.pop(0))
 
-    return key
+            key += chr(shifts + ord("A"))
+        print(key)
+
+    return probable_key_sizes
 
 
 def main():
-    text = read_file("desafio1.txt")
-    print(vigenere_discover_key(text))
+    text = read_file("desafio2.txt")
+    print(vigenere_discover_keys(text))
 
 
 if __name__ == "__main__":
