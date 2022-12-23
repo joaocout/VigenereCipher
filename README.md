@@ -1,2 +1,2 @@
-# VigenereCipher
-Implements ciphering and deciphering with the Vigenère cipher.
+# Vigenère Cipher
+Implements ciphering, deciphering, and attack using Kasiski examination.
