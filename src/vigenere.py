@@ -1,7 +1,8 @@
-# Joao Pedro Assuncao Coutinho - 18/0019813
+import os
+
 
 def read_file(file_path: str) -> list[str]:
-    f = open(file_path, "r")
+    f = open(file_path, "r", encoding='utf-8')
     lines = f.read().splitlines()
     f.close()
     return lines
@@ -60,7 +61,9 @@ def vigenere(text: list[str], key: str, mode: str):
 
 
 def main():
-    file_name = "desafio2.txt"
+    file_name = os.path.join(os.path.dirname(
+        __file__), os.pardir, 'resources/desafio2.txt')
+
     key = "TEMPORAL"
 
     text = read_file(file_name)

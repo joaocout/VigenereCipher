@@ -1,4 +1,5 @@
-# Joao Pedro Assuncao Coutinho - 180019813
+import os
+
 
 letter_frequency = {
     "a": 14.63,
@@ -43,7 +44,7 @@ def get_factors(n: int) -> list[int]:
 
 
 def read_file(file_path: str) -> list[str]:
-    f = open(file_path, "r")
+    f = open(file_path, "r", encoding='utf-8')
     lines = f.read().splitlines()
     f.close()
     return lines
@@ -141,7 +142,9 @@ def vigenere_discover_keys(text: list[str]) -> str:
 
 
 def main():
-    text = read_file("desafio2.txt")
+    text = read_file(os.path.join(os.path.dirname(__file__),
+                     os.pardir, 'resources/desafio2.txt'))
+
     print(vigenere_discover_keys(text))
 
 
